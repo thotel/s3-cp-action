@@ -22,24 +22,26 @@ jobs:
    - uses: actions/checkout@master
    
    - name: Upload binary to S3 bucket
-   uses: tpaschalis/s3-sync-action@master
+   uses: thotel/s3-sync-action@master
    with:
      args: --acl public-read
    env:
      FILE: ./gh-actions-golang
-     AWS_REGION: 'eu-central-1'
-     AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+     AWS_REGION: 'fr-par'
+     AWS_S3_BUCKET: ${{ vars.AWS_S3_BUCKET }}
      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+     AWS_S3_ENDPOINT: ${{ vars.S3_ENDPOINT }}
 ```
 
 
 ### Required Environment Variables
 
-| Key | Value | Type | Required |
-| ------------- | ------------- | ------------- | ------------- |
-| `FILE` | The local file you wish to upload to S3. For example, `./myfile.txt`. | `env` | **Yes** |
+| Key | Value                                                                                                                                                                                                                        | Type | Required |
+| ------------- |------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ------------- | ------------- |
+| `FILE` | The local file you wish to upload to S3. For example, `./myfile.txt`.                                                                                                                                                        | `env` | **Yes** |
 | `AWS_REGION` | The region where you created your bucket in. For example, `eu-central-1`. [Full list of regions here.](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-available-regions) | `env` | **Yes** |
+| `AWS_S3_ENDPOINT` | The S3 endpoint. For example, `https://s3.fr-par.scw.cloud`. | `env` | **Yes** |
 
 
 ### Required Secret Variables
