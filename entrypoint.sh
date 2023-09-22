@@ -14,6 +14,9 @@ if [ -n "$AWS_S3_ENDPOINT" ]; then
   ENDPOINT_APPEND="--endpoint-url $AWS_S3_ENDPOINT"
 fi
 
+pwd
+ls -la
+
 aws s3 cp ${FILE} s3://${AWS_S3_BUCKET} \
             ${ENDPOINT_APPEND} $*
 
